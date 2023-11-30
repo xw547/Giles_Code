@@ -1,0 +1,16 @@
+citHeader("To cide forestError in publications, please use:")
+
+citEntry(entry = "Article",
+  title = "A Unified Framework for Random Forest Prediction Error Estimation",
+  author = personList(as.person("Benjamin Lu"),
+                      as.person("Johanna Hardin")),
+  journal = "Journal of Machine Learning Research",
+  year = "2021",
+  volume="22",
+  number="8",
+  pages="1--41",
+
+  textVersion = paste("Benjamin Lu and Johanna Hardin.",
+                      "A Unified Framework for Random Forest Prediction Error Estimation.",
+                      "Journal of Machine Learning Research, 22(8):1-41, 2021.")
+)
