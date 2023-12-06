@@ -38,7 +38,7 @@ for(i in 1:n){
   beta_curr = beta[-1]
   beta_curr[1] = (1+rho)*beta_curr[1]
   curr_y_2 =  rnorm(N, beta_curr%*%X[i,-1],2-rho^2)
-  zero_term[i] = mean((Y[i]  - full_model$predicted[i]) * (Y[i] - full_model$predicted[i]))
+  zero_term[i] = mean((curr_y_2 - Y[i] ) * (Y[i] - full_model$predicted[i]))
   first_term[i] = mean(curr_y_2 * (Y[i] - full_model$predicted[i]))
   #first_term[i] = mean(curr_y_2/curr_y)
   #zero_term[i] = c(beta%*%X[i,]) * (Y[i]- full_model$predicted[i])
