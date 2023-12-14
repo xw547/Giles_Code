@@ -12,7 +12,7 @@ registerDoParallel(7)
 set.seed(2023)
 
 n    = 2000
-rho  = 0.9
+rho  = 0.5
 X_12 = mvrnorm(n, rep(0.5,2), Sigma = matrix(c(1, rho, rho,1), ncol =2))
 # X_12 = rbinormcop(n, rho)
 X_310 = matrix(runif(n*8, 0,1), ncol = 8)

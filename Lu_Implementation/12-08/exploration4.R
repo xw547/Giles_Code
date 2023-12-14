@@ -44,7 +44,7 @@ third_term = c()
 for (i in 1:n){
   beta_curr = beta[-1]
   beta_curr[1] = (1+rho)*beta_curr[1]
-  curr_y = rnorm(N, beta_curr%*%X[i,-1],sqrt(2-rho^2))
+  curr_y = rnorm(N, beta_curr%*%X[i,-1],sqrt(1.1-rho^2))
   curr_x = rnorm(N, X[i,2]*rho, sqrt(1-rho^2))
   second_data =  as.data.frame(cbind(curr_x, matrix(rep(X[i,-1], N), ncol = 9, byrow = T)))
   colnames(second_data) <- c("1", "2", "3", "4", "5", "6", "7","8", "9", "10")

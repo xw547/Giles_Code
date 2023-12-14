@@ -1,4 +1,5 @@
-### In this document, I'll specify the 
+### The idea would be to use sample splitting 
+### technique to reduce the bias. 
 
 ### Loading required packages
 library("MASS")
@@ -26,10 +27,18 @@ reduced_model = randomForest(X[,-1], Y, nodesize = 5,
                              ntree = 500, keep.inbag = T)
 full_model    = randomForest(X[,], Y, nodesize = 5, 
                              ntree = 500, keep.inbag = T)
-reduced_den = empirical_rf_pdf(reduced_model, X[,-1], X[,-1])
+# Speeeeeed reduced_den = empirical_rf_pdf(reduced_model, X[,-1], X[,-1])
 
 
+set.seed(2023+347)
+X_12 = mvrnorm(n, rep(0.5,2), Sigma = matrix(c(1, rho, rho,1), ncol =2))
+# X_12 = rbinormcop(n, rho)
+X_310 = matrix(runif(n*8, 0,1), ncol = 8)
+X_2 = cbind(X_12, X_310)
+colnames(X_2) <- c("1", "2", "3", "4", "5", "6", "7","8", "9", "10")
+beta = c(1, 1, 1, 1, 1, 0, 0.5, 0.8, 1.2, 1.5)
 
+Y_2 = c(X_2%*%beta + rnorm(n, 0, 1))
 
 ### We'll start with the cpi of the first feature. 
 
@@ -44,16 +53,16 @@ third_term = c()
 for (i in 1:n){
   beta_curr = beta[-1]
   beta_curr[1] = (1+rho)*beta_curr[1]
-  curr_y = rnorm(N, beta_curr%*%X[i,-1],sqrt(2-rho^2))
-  curr_x = rnorm(N, X[i,2]*rho, sqrt(1-rho^2))
-  second_data =  as.data.frame(cbind(curr_x, matrix(rep(X[i,-1], N), ncol = 9, byrow = T)))
+  curr_y = rnorm(N, beta_curr%*%X_2[i,-1],sqrt(2-rho^2))
+  curr_x = rnorm(N, X_2[i,2]*rho, sqrt(1-rho^2))
+  second_data =  as.data.frame(cbind(curr_x, matrix(rep(X_2[i,-1], N), ncol = 9, byrow = T)))
   colnames(second_data) <- c("1", "2", "3", "4", "5", "6", "7","8", "9", "10")
   
-  zero_term[i] = 2*mean((curr_y - full_model$predicted[i])*
-                          (Y[i] - full_model$predicted[i]))
-  first_term[i] = mean((curr_y  - full_model$predicted[i])^2)
+  zero_term[i] = 2*mean((curr_y - predict(full_model, X_2[i,]))*
+                          (Y_2[i] - predict(full_model, X_2[i,])))
+  first_term[i] = mean((curr_y  - predict(full_model, X_2[i,]))^2)
   second_term[i] = mean((curr_y -  predict(full_model, newdata = second_data))^2)
-  third_term[i] = mean((Y[i] -  predict(full_model, newdata = second_data))^2)
+  third_term[i] = mean((Y_2[i] -  predict(full_model, newdata = second_data))^2)
 }
 mean(zero_term)
 mean(first_term)
