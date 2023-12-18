@@ -59,8 +59,8 @@ SE_vec <- sqrt(colMeans(coverage_mat)/1999)
 coverage <- c()
 
 for(i in 1:5){
-  eif_Lower = eif_mean[i] - t_95*SE_vec[i]
-  eif_Upper = eif_mean[i] + t_95*SE_vec[i]
+  eif_Lower = eif_mean[i] - t_95*SE_vec[i]/2
+  eif_Upper = eif_mean[i] + t_95*SE_vec[i]/2
   eif_covered =  mean(estimate_mat[,i]<= eif_Upper&estimate_mat[,i]>=eif_Lower)
   coverage[i]  = eif_covered
 }

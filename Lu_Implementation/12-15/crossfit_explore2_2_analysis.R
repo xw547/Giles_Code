@@ -20,11 +20,20 @@ bias_estimation <- data.frame(bias_estimation)
 colnames(bias_estimation) <- c("First_Term", "Second_Term", "Third_Term",
                                "Forth_Term", "Estimate", "True_Value", "rho")
 
-estimation_plot = ggplot(data = bias_estimation, aes(x = rho))   +
-  geom_line(aes(x = rho, y = Second_Term), color = "#D16103") +
-  geom_line(aes(x = rho, y = Third_Term), color = "#52854C")  + 
-  geom_line(aes(x = rho, y = Forth_Term), color = "#4E84C4")  +
-  geom_line(aes(x = rho, y = True_Value), color = "#999999") 
+# Define a custom color palette
+my_colors <- c("#D16103", "#52854C", "#4E84C4", "#999999")
+variable_names <- c("Second_Term", "Third_Term", "Forth_Term", "True_Value")
+names(my_colors) <- variable_names
+
+# Reshape the data into longer format
+bias_estimation_long <- pivot_longer(bias_estimation, cols = c(Second_Term, Third_Term, Forth_Term, True_Value))
+
+# Create the plot using the reshaped data and the custom color palette
+estimation_plot <- ggplot(data = bias_estimation_long, aes(x = rho, y = value, color = name)) +
+  geom_line() +
+  scale_color_manual(values = my_colors) +
+  ylab("Value") +
+  labs(color = "Term")
 
 estimation_plot = ggplot(data = bias_estimation, aes(x = rho)) + 
   geom_line(aes(x = rho, y = True_Value), color = "#999999") +
@@ -58,8 +67,8 @@ SE_vec <- sqrt(colMeans(coverage_mat)/1999)
 coverage <- c()
 
 for(i in 1:5){
-  eif_Lower = eif_mean[i] - t_95*SE_vec[i]
-  eif_Upper = eif_mean[i] + t_95*SE_vec[i]
+  eif_Lower = eif_mean[i] - t_95*SE_vec[i]/2
+  eif_Upper = eif_mean[i] + t_95*SE_vec[i]/2
   eif_covered =  mean(estimate_mat[,i]<= eif_Upper&estimate_mat[,i]>=eif_Lower)
   coverage[i]  = eif_covered
 }
