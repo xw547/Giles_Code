@@ -5,11 +5,11 @@ library("ggplot2")
 
 setwd("~/Working/Ning/Giles_Project_1/Code/Lu_Implementation/12-08/")
 
-explor1_rho1 = data.matrix(read.csv("./var_explore_1_rf_large_rho1.csv"))[,-c(1,6)]
-explor1_rho3 = data.matrix(read.csv("./var_explore_1_rf_large_rho3.csv"))[,-c(1,6)]
-explor1_rho5 = data.matrix(read.csv("./var_explore_1_rf_large_rho5.csv"))[,-c(1,6)]
-explor1_rho7 = data.matrix(read.csv("./var_explore_1_rf_large_rho7.csv"))[,-c(1,6)]
-explor1_rho9 = data.matrix(read.csv("./var_explore_1_rf_large_rho9.csv"))[,-c(1,6)]
+explor1_rho1 = data.matrix(read.csv("~/Working/Ning/Giles_Project_1/Code/Lu_Implementation/12-08/var_explore_1_rf_large_rho1.csv"))[,-c(1,6)]
+explor1_rho3 = data.matrix(read.csv("~/Working/Ning/Giles_Project_1/Code/Lu_Implementation/12-08/var_explore_1_rf_large_rho3.csv"))[,-c(1,6)]
+explor1_rho5 = data.matrix(read.csv("~/Working/Ning/Giles_Project_1/Code/Lu_Implementation/12-08/var_explore_1_rf_large_rho5.csv"))[,-c(1,6)]
+explor1_rho7 = data.matrix(read.csv("~/Working/Ning/Giles_Project_1/Code/Lu_Implementation/12-08/var_explore_1_rf_large_rho7.csv"))[,-c(1,6)]
+explor1_rho9 = data.matrix(read.csv("~/Working/Ning/Giles_Project_1/Code/Lu_Implementation/12-08/var_explore_1_rf_large_rho9.csv"))[,-c(1,6)]
 
 bias_estimation <- rbind(colMeans(explor1_rho1), colMeans(explor1_rho3),
                          colMeans(explor1_rho5), colMeans(explor1_rho7),
@@ -42,11 +42,11 @@ estimate_fun <- function(mat){
 
 eif_mean = 3-2*seq(from =.1, to = .9, by = .2)^2
 
-var_explor1_rho1 = data.matrix(read.csv("./var_explore_1_rf_large_rho1.csv"))[, 6]
-var_explor1_rho3 = data.matrix(read.csv("./var_explore_1_rf_large_rho3.csv"))[, 6]
-var_explor1_rho5 = data.matrix(read.csv("./var_explore_1_rf_large_rho5.csv"))[, 6]
-var_explor1_rho7 = data.matrix(read.csv("./var_explore_1_rf_large_rho7.csv"))[, 6]
-var_explor1_rho9 = data.matrix(read.csv("./var_explore_1_rf_large_rho9.csv"))[, 6]
+var_explor1_rho1 = data.matrix(read.csv("~/Working/Ning/Giles_Project_1/Code/Lu_Implementation/12-08/var_explore_1_rf_large_rho1.csv"))[, 6]
+var_explor1_rho3 = data.matrix(read.csv("~/Working/Ning/Giles_Project_1/Code/Lu_Implementation/12-08/var_explore_1_rf_large_rho3.csv"))[, 6]
+var_explor1_rho5 = data.matrix(read.csv("~/Working/Ning/Giles_Project_1/Code/Lu_Implementation/12-08/var_explore_1_rf_large_rho5.csv"))[, 6]
+var_explor1_rho7 = data.matrix(read.csv("~/Working/Ning/Giles_Project_1/Code/Lu_Implementation/12-08/var_explore_1_rf_large_rho7.csv"))[, 6]
+var_explor1_rho9 = data.matrix(read.csv("~/Working/Ning/Giles_Project_1/Code/Lu_Implementation/12-08/var_explore_1_rf_large_rho9.csv"))[, 6]
 
 coverage_mat <- cbind(var_explor1_rho1, var_explor1_rho3, var_explor1_rho5, 
                       var_explor1_rho7, var_explor1_rho9)

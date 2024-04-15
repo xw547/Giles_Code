@@ -1,4 +1,4 @@
-### Trying to replicate the work from Vanelli and Wasserman and see if the TL 
+### Trying to replicate the work from Vanelli and Wasserman and see if the TMLE 
 ### would improve their performance.
 
 library(grf)

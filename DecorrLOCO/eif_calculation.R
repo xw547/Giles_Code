@@ -48,7 +48,7 @@ density_ratio <- function(index, inputw, inputz, pw, pz, pwz){
 }
 
 ## Auxiliary functions for our calculation 
-## These functions are inherited from the linear model example, which should've
+## These functions are inherited from the linear model example, which should have
 ## been updated.
 
 mu_hat_star_z <- function(inputz, n = 100, pw, full_model){
@@ -189,5 +189,5 @@ epsilon_now = optimize(argmin, c(-0.5,0.5))$minimum
 if(epsilon_now<1e-5){print("last iteration")} 
 
 augment_margin <- function(pwz, epsilon_now){
-  pwz$estimate = 
+  pwz$estimate = f
 }
